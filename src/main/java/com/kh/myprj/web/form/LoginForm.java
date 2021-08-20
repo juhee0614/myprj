@@ -12,10 +12,11 @@ public class LoginForm {
 
 	@NotBlank
 	@Email
+	@Size(min=4, max=20)
 	private String email;
 	
 	@NotBlank
-	@Size(min=4,max =8)
+	@Size(min=4,max =10)
 	private String pw;
 	
 }
