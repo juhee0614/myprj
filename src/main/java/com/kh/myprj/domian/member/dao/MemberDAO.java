@@ -1,20 +1,47 @@
 package com.kh.myprj.domian.member.dao;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import com.kh.myprj.domian.member.dto.MemberDTO;
 
-import lombok.extern.slf4j.Slf4j;
-
-
 public interface MemberDAO {
-
-	//회원가입
+	/**
+	 * 가입
+	 * @param memberDTO
+	 * @return
+	 */
 	long insert(MemberDTO memberDTO);
 	
-	//회원조회 by id
-	MemberDTO findById(long id);
+	MemberDTO findByIDPw(String id, String pw);
 	
-	//회원조회 by email
+	
+	/**
+	 * 조회 by id
+	 * @param id
+	 * @return
+	 */
+	MemberDTO findByID(long id);
+	
+	/**
+	 * 조회 by email
+	 * @param email
+	 * @return
+	 */
 	MemberDTO findByEmail(String email);
+	
+	List<MemberDTO> selectAll();
+	
+	/**
+	 * 수정
+	 * @param id
+	 * @param memberDTO
+	 */
+	void update(long id, MemberDTO memberDTO);
+	
+	/**
+	 * 삭제
+	 * @param id
+	 */
+	void delete(long id);
+
 }

@@ -51,7 +51,7 @@ public class MemberDAOImplTest {
 	@DisplayName("회원조회 by id")
 	void findById() {
 		
-		log.info("findById:{}",mdao.findById(1));
+		log.info("findById:{}",mdao.findByID(1));
 	}
 	@Test
 	@DisplayName("회원조회 by email")

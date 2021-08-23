@@ -73,6 +73,10 @@ public class HomeController {
 		//세션제거
 		//false >>세션이 존재하면 가져오고 없으면 세션을 생성하지 않는다.
 		HttpSession session =  request.getSession(false);
+		
+		//세션에서 클라이언트 정보 얻어내기
+		//LoginMember loginMember =(LoginMember)session.getAttribute("loginMember");
+		
 		//세션값이 있으면 ~
 		if(session != null) {
 			//세션값 삭제
