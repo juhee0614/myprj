@@ -2,6 +2,7 @@ package com.kh.myprj.domian.member.dto;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Data;
 
@@ -17,8 +18,9 @@ public class MemberDTO {
 	private String gender;
 	private String region;
 	private Date birth;
+	private List<String> hobby;
 	private String letter;
-	private long fid;
+	private Long fid;
 	private LocalDateTime cdate;
 	private LocalDateTime udate;
 }

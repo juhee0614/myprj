@@ -2,6 +2,7 @@ package com.kh.myprj.domain.member.dao;
 
 import java.sql.Date;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -59,4 +60,24 @@ public class MemberDAOImplTest {
 		
 		log.info("findByEmail:{}",mdao.findByEmail("user@test.com"));
 	}
+	
+	@Test
+	@DisplayName("이메일찾기")
+	void findId() {
+		MemberDTO mdto = mdao.findByEmail("test@test.com");
+		String findedEmail =  mdao.findEmail(mdto.getTel(), mdto.getBirth());
+		Assertions.assertThat(findedEmail).isEqualTo(mdto.getEmail());
+	}
+	
+	@Test
+	@DisplayName("비밀번호찾기")
+	void findPw() {
+		MemberDTO mdto = mdao.findByEmail("test@test.com");
+		String findedPw =  mdao.findPw(mdto.getEmail(),mdto.getTel(), mdto.getBirth());
+		Assertions.assertThat(findedPw).isEqualTo(mdto.getPw());
+		
+	}
+	
+	
+	
 }
