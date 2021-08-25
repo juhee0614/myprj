@@ -13,6 +13,14 @@ public interface MemberSVC {
 	void join(MemberDTO memberDTO);
 	
 	/**
+	 * 조회 by email
+	 * @param email
+	 * @return
+	 */
+	MemberDTO findByEmail(String email);
+	
+	
+	/**
 	 * 회원존재우무 체크
 	 * @param email
 	 * @return
@@ -28,11 +36,21 @@ public interface MemberSVC {
 	MemberDTO isLogin(String email, String pw);
 	
 	/**
+	 * 회원유무체크
+	 * @param email
+	 * @param pw
+	 */
+	boolean isMember(String email,String pw);
+	
+	/**
 	 * 수정
 	 * @param id
 	 * @param memberDTO
 	 */
 	void update(long id, MemberDTO memberDTO);
+	//회원수정
+	
+	
 	/**
 	 * 이메일 찾기
 	 * @param tel

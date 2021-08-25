@@ -98,10 +98,16 @@ private final JdbcTemplate jt;
 	//취미 삭제
 	@Override
 	public void delHobby(long id) {
-		String sql = "delete from hobby where id = ? ";
+		String sql = "delete from hobby where member_id = ? ";
 		jt.update(sql, id);
 	}
-	
+	//취미조회
+	@Override
+		public List<String> getHobby(long id) {
+			String sql = "select code_code from hobby where member_id= ? ";
+		return	jt.queryForList(sql, String.class, id);
+		
+		}
 	//회원조회 by id
 	@Override
 	public MemberDTO findByID(long id) {
@@ -191,9 +197,27 @@ private final JdbcTemplate jt;
 		return null;
 	}
 
+	//회원수정
 	@Override
 	public void update(long id, MemberDTO memberDTO) {
-		// TODO Auto-generated method stub
+		StringBuffer sql = new StringBuffer();
+		sql.append("update member ");
+		sql.append("set tel =?, ");
+		sql.append("    nickname =?, ");
+		sql.append("    gender = ?, ");
+		sql.append("    region = ?, ");
+		sql.append("    birth =?, ");
+		sql.append("    letter = ?, ");
+		sql.append("    udate = SYSTIMESTAMP ");
+		sql.append("where id =?  ");
+		
+		jt.update(sql.toString(),memberDTO.getTel(),
+														memberDTO.getNickname(),
+														memberDTO.getGender(),
+														memberDTO.getRegion(),
+														memberDTO.getBirth(),
+														memberDTO.getLetter(),
+														id);
 		
 	}
 

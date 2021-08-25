@@ -3,9 +3,9 @@ package com.kh.myprj.domian.member.svc;
 import java.sql.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.myprj.domian.member.dao.MemberDAO;
 import com.kh.myprj.domian.member.dto.MemberDTO;
@@ -16,12 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @AllArgsConstructor
-@Transactional			//1.트랜잭션 보장 2.서비스층에서 사용
+@Transactional(readOnly = true)			//1.트랜잭션 보장 2.서비스층에서 사용
 public class MemberSVCImpl implements MemberSVC{
 
 private final MemberDAO memberDAO;
 	
 	//가입
+	@Transactional(readOnly = false)	
 	@Override
 	public void join(MemberDTO memberDTO) {
 		long id = memberDAO.insert(memberDTO);
@@ -32,7 +33,16 @@ private final MemberDAO memberDAO;
 			memberDAO.addHobby(id,memberDTO.getHobby());
 		}		
 	}
-
+	//회원조회 by email
+	@Override
+		public MemberDTO findByEmail(String email) {
+			//회원정보 가져오기
+			MemberDTO memberDTO = memberDAO.findByEmail(email);
+			//회원의 취미 가져오기
+			memberDTO.setHobby(memberDAO.getHobby(memberDTO.getId()));
+			
+			return memberDTO;
+		}
 	//이메일 중복체크
 	@Override
 	public boolean isExistEmail(String email) {
@@ -50,9 +60,20 @@ private final MemberDAO memberDAO;
 		return mdto;
 	}
 	
+	//회원유무체크
 	@Override
+		public boolean isMember(String email, String pw) {
+			return memberDAO.isLogin(email, pw);
+		}
+	
+	//회원수정
+	@Override
+	@Transactional(readOnly = false)	
 	public void update(long id, MemberDTO memberDTO) {
 		memberDAO.update(id, memberDTO);
+		//취미수정
+		memberDAO.delHobby(id);
+		memberDAO.addHobby(id, memberDTO.getHobby());
 	}
 
 	//이메일 찾기
