@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -244,7 +245,8 @@ private final JdbcTemplate jt;
 		sql.append("   and birth = ? ");
 		
 		String email = 
-				jt.queryForObject(sql.toString(), String.class, tel, birth);
+				jt.queryForObject(sql.toString(), String.class, tel, 
+						new SimpleDateFormat("yyyy-MM-dd").format(birth));
 		return email;
 	}
 	
@@ -258,7 +260,8 @@ private final JdbcTemplate jt;
 		sql.append("   and birth = ? ");
 		
 		String pw = 
-				jt.queryForObject(sql.toString(), String.class, email, tel, birth);
+				jt.queryForObject(sql.toString(), String.class, email, tel,
+						new SimpleDateFormat("yyyy-MM-dd").format(birth));
 		return pw;
 	}
 }
