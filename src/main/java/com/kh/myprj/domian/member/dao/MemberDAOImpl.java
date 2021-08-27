@@ -264,4 +264,21 @@ private final JdbcTemplate jt;
 						new SimpleDateFormat("yyyy-MM-dd").format(birth));
 		return pw;
 	}
+	
+	//비밀번호 변경
+	@Override
+		public int changePw(String email,String prePw, String postPw) {
+			StringBuffer sql = new StringBuffer();
+			sql.append("update member ");
+			sql.append("  set pw = ? ");				//변경할비밀번호
+			sql.append("  where email =? ");
+			sql.append("  and pw =? ");			//현재비밀번호
+			
+			return jt.update(sql.toString(),postPw,email,prePw);
+		}
+	
+	
+	
+	
+	
 }

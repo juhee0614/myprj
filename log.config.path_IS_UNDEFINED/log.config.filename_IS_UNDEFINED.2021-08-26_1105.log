@@ -1,0 +1,22 @@
+DEBUG 21-08-26 17:29:29[RMI TCP Connection(651)-127.0.0.1] [AnnotationMBeanExporter:452] - Unregistering JMX-exposed beans on shutdown
+DEBUG 21-08-26 17:29:29[RMI TCP Connection(651)-127.0.0.1] [AnnotationMBeanExporter:186] - Unregistering JMX-exposed beans
+DEBUG 21-08-26 17:29:29[RMI TCP Connection(651)-127.0.0.1] [ThreadPoolTaskExecutor:218] - Shutting down ExecutorService 'applicationTaskExecutor'
+INFO  21-08-26 17:29:29[RMI TCP Connection(651)-127.0.0.1] [LocalContainerEntityManagerFactoryBean:651] - Closing JPA EntityManagerFactory for persistence unit 'default'
+DEBUG 21-08-26 17:29:29[RMI TCP Connection(651)-127.0.0.1] [SessionFactoryImpl:792] - HHH000031: Closing
+DEBUG 21-08-26 17:29:29[RMI TCP Connection(651)-127.0.0.1] [TypeConfiguration$Scope:350] - Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@1f8d3ad4] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@717bcaa]
+DEBUG 21-08-26 17:29:29[RMI TCP Connection(651)-127.0.0.1] [AbstractServiceRegistryImpl:419] - Implicitly destroying ServiceRegistry on de-registration of all child ServiceRegistries
+DEBUG 21-08-26 17:29:29[RMI TCP Connection(651)-127.0.0.1] [BootstrapServiceRegistryImpl:295] - Implicitly destroying Boot-strap registry on de-registration of all child ServiceRegistries
+INFO  21-08-26 17:29:29[RMI TCP Connection(651)-127.0.0.1] [HikariDataSource:350] - HikariPool-69 - Shutdown initiated...
+DEBUG 21-08-26 17:29:29[RMI TCP Connection(651)-127.0.0.1] [HikariPool:421] - HikariPool-69 - Before shutdown stats (total=10, active=0, idle=10, waiting=0)
+DEBUG 21-08-26 17:29:29[HikariPool-69 connection closer] [PoolBase:134] - HikariPool-69 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@40960a8c: (connection evicted)
+DEBUG 21-08-26 17:29:29[HikariPool-69 connection closer] [PoolBase:134] - HikariPool-69 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@697ce3c4: (connection evicted)
+DEBUG 21-08-26 17:29:29[HikariPool-69 connection closer] [PoolBase:134] - HikariPool-69 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@9ed0916: (connection evicted)
+DEBUG 21-08-26 17:29:29[HikariPool-69 connection closer] [PoolBase:134] - HikariPool-69 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@3089d5e0: (connection evicted)
+DEBUG 21-08-26 17:29:29[HikariPool-69 connection closer] [PoolBase:134] - HikariPool-69 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@3515196a: (connection evicted)
+DEBUG 21-08-26 17:29:29[HikariPool-69 connection closer] [PoolBase:134] - HikariPool-69 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@5b57501d: (connection evicted)
+DEBUG 21-08-26 17:29:29[HikariPool-69 connection closer] [PoolBase:134] - HikariPool-69 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@69c13b75: (connection evicted)
+DEBUG 21-08-26 17:29:29[HikariPool-69 connection closer] [PoolBase:134] - HikariPool-69 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@7d97278c: (connection evicted)
+DEBUG 21-08-26 17:29:29[HikariPool-69 connection closer] [PoolBase:134] - HikariPool-69 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@71711f70: (connection evicted)
+DEBUG 21-08-26 17:29:29[HikariPool-69 connection closer] [PoolBase:134] - HikariPool-69 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@68adf8c5: (connection evicted)
+DEBUG 21-08-26 17:29:29[RMI TCP Connection(651)-127.0.0.1] [HikariPool:421] - HikariPool-69 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+INFO  21-08-26 17:29:29[RMI TCP Connection(651)-127.0.0.1] [HikariDataSource:352] - HikariPool-69 - Shutdown completed.

@@ -101,4 +101,13 @@ private final MemberDAO memberDAO;
 	public void delete(String email) {
 		memberDAO.delete(email);
 	}
+	
+	@Override
+		public boolean changePw(String email,String prePw, String postPw) {
+			
+			return memberDAO.changePw(email, prePw, postPw)==1 ? true : false;
+		}
+	
+	
+	
 }

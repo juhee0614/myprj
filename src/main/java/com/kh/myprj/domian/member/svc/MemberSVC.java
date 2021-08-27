@@ -79,4 +79,11 @@ public interface MemberSVC {
 	 * @param email
 	 */
 	void delete(String email);	
+	
+	/**
+	 * 회원비밀번호 변경
+	 * @param prePw
+	 * @param postPw
+	 */
+	boolean changePw(String email, String prePw,String postPw);
 }

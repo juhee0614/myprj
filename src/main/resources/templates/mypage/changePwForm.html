@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko" 
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/main::copyParam(
+      	~{::title}, <!--/* title 		대체 */-->
+      	~{::link},	<!--/* links 		추가 */-->
+      	~{},				<!--/* scripts 	생략 */-->
+      	~{::style},				<!--/* style */-->
+      	~{},				<!--/* header */-->
+      	_,					<!--/* nav */ 기본값 사용 */-->       	
+      	~{::main},  <!--/* main 		대체 */-->
+      	_					<!--/* footer */ 기본값 사용 */--> 
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>회원가입</title>
+  
+  <link rel="stylesheet" href="/css/member/joinForm.css" />
+  <script src="/js/xxx.js" defer></script>
+  <style>
+  	.global-wrap .inner.main-inner main{
+  		display:flex;
+			justify-content: center;
+			padding:50px;
+  	}
+  	.global-wrap .main .inner.main-inner main .frm{
+  		margin:0 auto;
+  		width:250px;
+  		}
+  		
+  	.global-wrap .main dl{
+  	display:flex;
+  	justify-content: space-between;
+  	margin: 5px 0;
+  	}
+  	.global-wrap .main .box1{
+  	 margin: 100px auto;
+      padding: 10px;
+      border: 1px solid #ffcccb;
+      border-radius: 5px;
+  	}
+  	.global-wrap .main .box1 h3{
+  	text-align: center;
+  	padding : 5px 0;
+  	}
+  	.global-wrap .main .box1 dl dd{
+  	flex-basis: 40%
+  	}
+  	.global-wrap .main .box1 dl dt{
+  	flex-basis: 60%;
+  	margin-right: 5px;
+  	}
+  	.global-wrap .main .box1 button{
+  	width:100%;
+  	font-weight: bold;
+  	background-color: #ef9a9a; color: dimgrey;
+  	padding : 3px;
+  	border : none;
+  	outline : none;
+  	border-radius: 5px;
+  	}
+  	
+  </style>
+</head>
+<body>
+  <div class="global-wrap">
+    <div class="hdr">
+      <div class="inner hdr-inner">
+        <header>헤더</header>
+      </div>
+    </div>
+    <div class="main">
+      <div class="inner main-inner">
+      	<main>
+					 <div class="box1">
+					  <h3>비밀번호 변경</h3>
+					 	<form th:action="@{/members/pw}" th:method="patch" th:object="${changePwForm}">
+					  <dl th:errors="*{global}" th:errorclass="field-msg">
+								<p th:each="err : ${#fields.globalErrors()}"
+									th:text="${err}">글로벌 오류 메시지</p> 
+							</dl> 
+					    <dl>
+					      <dt><label for="">현재 비밀번호</label></dt>
+					      <dd><input type="password" th:field ="*{prepw}"></dd>
+					    </dl>
+					    <p th:errors="*{prepw}" th:errorclass="field-msg"></p>
+					    <dl>
+					      <dt><label for="">변경 할 비밀번호</label></dt>
+					      <dd><input type="password"  th:field ="*{postpw}" ></dd>
+					    </dl>
+					    <p th:errors="*{postpw}" th:errorclass="field-msg"></p>
+					    <dl>
+					      <dt><label for="">비밀번호 확인</label></dt>
+					      <dd><input type="password"  th:field ="*{postpwChk}" ></dd>
+					    </dl>
+					    <p th:errors="*{postpwChk}" th:errorclass="field-msg"></p>
+					    <button type="submit" id="changedBtn">변경</button>
+					    </form>
+					  </div>
+      	</main>
+      </div>
+    </div>
+    <div class="foot">
+      <div class="inner foot-inner" th:insert="${footer}">
+        <footer>푸터</footer>
+      </div>
+    </div>    
+  </div>
+</body>
+</html>

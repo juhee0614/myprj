@@ -1,10 +1,12 @@
 package com.kh.myprj.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.myprj.domian.member.svc.MemberSVC;
+import com.kh.myprj.web.api.FindEmailReq;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +25,8 @@ public class HelpController {
 	}
 	//회원 아이디찾기 화면 출력
 	@GetMapping("/findId")
-	public String findId() {
+	public String findId(Model model) {
+		model.addAttribute("findEmailReq",new FindEmailReq());
 		return "help/findIdForm";
 	}
 	//회원 비밀번호 찾기 화면 출력

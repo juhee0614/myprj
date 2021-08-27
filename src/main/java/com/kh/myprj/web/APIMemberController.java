@@ -1,11 +1,7 @@
 package com.kh.myprj.web;
 
-import javax.validation.Valid;
-
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +22,7 @@ public class APIMemberController {
 	
 	private final MemberSVC memberSVC;
 	
-	@GetMapping("/email")
+	@PostMapping("/email")
 	//바디에 응답메세지 직접 써넣음 (ajax 쓸때 써줘야돼)
 	//@ResponseBody
 	public JsonResult<String> findEmail(@RequestBody 
@@ -44,7 +40,7 @@ public class APIMemberController {
 		return new JsonResult<String>("00","ok",findedEmail);
 		
 	}
-	@GetMapping("/pw")
+	@PostMapping("/pw")
 	public Object findPw(@RequestBody 
 			FindPwReq	findPwReq,
 			BindingResult bindingResult) {
