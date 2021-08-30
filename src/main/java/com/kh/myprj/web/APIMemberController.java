@@ -1,9 +1,11 @@
 package com.kh.myprj.web;
 
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.myprj.domian.member.svc.MemberSVC;
@@ -21,6 +23,19 @@ import lombok.extern.slf4j.Slf4j;
 public class APIMemberController {
 	
 	private final MemberSVC memberSVC;
+	
+	//이메일 중복확인
+	@GetMapping("/email/dupchk")
+	public JsonResult<String> dupChkEmail(@RequestParam String email){
+		JsonResult<String> result = null;
+	if(	memberSVC.isExistEmail(email)) {
+		result = new JsonResult<String>("00","ok",email);
+	}else {
+		result = new JsonResult<String>("01","nok",null);
+		
+		}
+	return result;
+	}
 	
 	@PostMapping("/email")
 	//바디에 응답메세지 직접 써넣음 (ajax 쓸때 써줘야돼)

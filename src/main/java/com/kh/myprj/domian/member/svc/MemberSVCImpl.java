@@ -101,7 +101,12 @@ private final MemberDAO memberDAO;
 	public void delete(String email) {
 		memberDAO.delete(email);
 	}
-	
+	//email 회원탈퇴
+	@Override
+		public void outMember(String email, String pw) {
+			memberDAO.outMember(email,pw);
+			
+		}
 	@Override
 		public boolean changePw(String email,String prePw, String postPw) {
 			

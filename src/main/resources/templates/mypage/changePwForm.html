@@ -7,7 +7,7 @@
       	~{},				<!--/* scripts 	생략 */-->
       	~{::style},				<!--/* style */-->
       	~{},				<!--/* header */-->
-      	_,					<!--/* nav */ 기본값 사용 */-->       	
+      	~{::nav},					<!--/* nav */ 대체*/-->       	
       	~{::main},  <!--/* main 		대체 */-->
       	_					<!--/* footer */ 기본값 사용 */--> 
       )}">
@@ -16,7 +16,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>회원가입</title>
+  <title>회원수정</title>
   
   <link rel="stylesheet" href="/css/member/joinForm.css" />
   <script src="/js/xxx.js" defer></script>
@@ -66,40 +66,56 @@
   </style>
 </head>
 <body>
-  <div class="global-wrap">
+ <div class="global-wrap">
     <div class="hdr">
       <div class="inner hdr-inner">
-        <header>헤더</header>
+        <header>회원수정</header>
       </div>
     </div>
+    <div class="gnb">
+      <div class="inner gnb-inner">
+        <nav th:replace="~{fragment/gnb/menu::myinfo}"></nav>
+      </div>
+    </div>      
     <div class="main">
       <div class="inner main-inner">
       	<main>
-					 <div class="box1">
-					  <h3>비밀번호 변경</h3>
-					 	<form th:action="@{/members/pw}" th:method="patch" th:object="${changePwForm}">
-					  <dl th:errors="*{global}" th:errorclass="field-msg">
+      	
+				  <div class="box1">
+				    <h3>비밀번호 변경</h3>
+				    <form th:action="@{/members/pw}" th:method="patch" th:object="${changePwForm}">
+      				<div th:errors="*{global}" th:errorclass="field-msg">
 								<p th:each="err : ${#fields.globalErrors()}"
-									th:text="${err}">글로벌 오류 메시지</p> 
-							</dl> 
+																			 th:text="${err}">글로벌 오류 메시지</p>      				
+      				</div>					    
 					    <dl>
-					      <dt><label for="">현재 비밀번호</label></dt>
-					      <dd><input type="password" th:field ="*{prepw}"></dd>
+					      <dt><label for="prepw">현재 비밀번호</label></dt>
+					      <dd><input type="password" th:field="*{prepw}"></dd>
+					      <dt></dt>
+					      <dd><p th:errors="*{prepw}" th:errorclass="field-msg"></p></dd>
+							</dl>
+					    									
+							<dl>
+					      <dt><label for="postpw">변경할 비밀번호</label></dt>
+					      <dd><input type="password" th:field="*{postpw}"></dd>
+					      <dt></dt>
+					      <dd><p th:errors="*{postpw}" th:errorclass="field-msg"></p></dd>
 					    </dl>
-					    <p th:errors="*{prepw}" th:errorclass="field-msg"></p>
+							
 					    <dl>
-					      <dt><label for="">변경 할 비밀번호</label></dt>
-					      <dd><input type="password"  th:field ="*{postpw}" ></dd>
+					      <dt><label for="postpwChk">비밀번호 확인</label></dt>
+							  <dd><input type="password" th:field="*{postpwChk}"></dd>
+					      <dt></dt>
+							  <dd><p th:errors="*{postpwChk}" th:errorclass="field-msg"></p></dd>
 					    </dl>
-					    <p th:errors="*{postpw}" th:errorclass="field-msg"></p>
 					    <dl>
-					      <dt><label for="">비밀번호 확인</label></dt>
-					      <dd><input type="password"  th:field ="*{postpwChk}" ></dd>
-					    </dl>
-					    <p th:errors="*{postpwChk}" th:errorclass="field-msg"></p>
-					    <button type="submit" id="changedBtn">변경</button>
-					    </form>
-					  </div>
+					      <dt></dt>
+							  <dd><button type="submit" class="btn" id='changeBtn'>비밀번호 변경</button></dd>
+					    </dl>					    
+				    </form>
+				  </div>
+      	
+      	
       	</main>
       </div>
     </div>

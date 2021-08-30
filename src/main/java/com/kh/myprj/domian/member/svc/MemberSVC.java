@@ -79,6 +79,11 @@ public interface MemberSVC {
 	 * @param email
 	 */
 	void delete(String email);	
+	/**
+	 * 탈퇴
+	 * @param email
+	 */
+	void outMember(String email, String pw);
 	
 	/**
 	 * 회원비밀번호 변경

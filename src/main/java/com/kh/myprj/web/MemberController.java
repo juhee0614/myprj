@@ -1,6 +1,8 @@
 package com.kh.myprj.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.myprj.domian.common.dao.CodeDAO;
 import com.kh.myprj.domian.member.dto.MemberDTO;
@@ -239,20 +242,49 @@ public class MemberController {
 	 * @return
 	 */
 	@GetMapping("/out")
-	public String out() {
+	public String outForm() {
 		log.info("회원탈퇴 양식 출력");
 		
-		return "members/out";
+		return "mypage/memberOutForm";
 	}
 	
 	/**
 	 * 회원탈퇴
 	 * @return
 	 */
-	@DeleteMapping("/{id:.+}")
-	public String out(@PathVariable("id") String id) {
+	@DeleteMapping("/out")
+	public String out(@RequestParam String pw, 
+										HttpServletRequest request,
+										Model model) {
+		
 		log.info("회원탈퇴");
-		log.info("회원:{}",id);
+		//bindingResult 를 쓸수없으니 map 형식에 유형을 담아서 출력
+		Map<String, String> errors = new HashMap<>();
+		
+		if(pw == null || pw.trim().length() == 0) {
+				errors.put("pw", "비밀번호를 입력하세요");
+				model.addAttribute("errors",errors);
+			return "mypage/memberOutForm";
+		}
+		
+		HttpSession session =  request.getSession(false);
+		if(session == null) return "redirect:/login";
+		
+		LoginMember loginMember = (LoginMember) session.getAttribute("loginMember");
+		//회원존재유무확인
+		if( memberSVC.isMember(loginMember.getEmail()	, pw)) {
+			//탈퇴
+			memberSVC.outMember(loginMember.getEmail(), pw);
+		}else {
+			errors.put("global", "비밀번호가 잘못되었습니다!");
+			model.addAttribute("errors",errors);
+		}
+		if(!errors.isEmpty()) {
+			return "mypage/memberOutForm";
+		}
+		//세션제거
+		session.invalidate();
+		
 		return "home";
 	}
 	/**

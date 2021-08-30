@@ -184,6 +184,7 @@ private final JdbcTemplate jt;
 		sql.append("  from member ");
 		sql.append(" where email = ? ");
 		sql.append("   and pw = ? ");
+		sql.append("   and status is null ");
 		
 		Integer cnt = 
 				jt.queryForObject(sql.toString(), Integer.class, email, pw);
@@ -235,7 +236,18 @@ private final JdbcTemplate jt;
 		String sql = "delete from member where email = ? ";
 		jt.update(sql, email);
 	}
-	
+	// email 회원 탈퇴
+	@Override
+		public void outMember(String email, String pw) {
+		StringBuffer sql = new StringBuffer();
+			sql.append("update member ");
+			sql.append("	set status ='D' ");
+			sql.append("where email =? ");
+			sql.append(" and pw =? ");
+			
+			jt.update(sql.toString(),email,pw);
+			
+		}
 	//회원아이디(이메일) 찾기
 	@Override
 	public String findEmail(String tel, Date birth) {

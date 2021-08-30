@@ -21,6 +21,7 @@ public class MemberDTO {
 	private List<String> hobby;
 	private String letter;
 	private Long fid;
+	private String status;
 	private LocalDateTime cdate;
 	private LocalDateTime udate;
 }
