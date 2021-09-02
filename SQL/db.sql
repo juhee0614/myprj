@@ -58,4 +58,35 @@ create table hobby (
   code_code varchar2(11),
   constraint hobby_pk primary key(member_id,code_code)
 );
+
+drop table board;
+create table board(
+bnum          number(10),
+bcategory     varchar2(11),
+btitle        varchar2(150),
+bid           number(8),
+bemail        varchar2(40),
+bnickname     varchar2(30),
+bhit          number(5),
+bcontent      clob,
+pbnum         number(10),
+bgroup        number(10),
+bstep         number(3),
+bindent       number(3),
+status        char(1),
+bcdate        timestamp default systimestamp,
+budate        timestamp,
+constraint board_bnum_pk primary key(bnum),
+constraint board_bcategory_fk foreign key(bcategory) references code(code),
+constraint board_bid_fk foreign key(bid) references member(id),
+constraint board_bemail_fk foreign key(bemail) references member(email)
+);
+
+drop sequence board_bnum_seq;
+create sequence board_bnum_seq
+increment by 1
+start with 1
+maxvalue 999999999
+nocycle;
+
 commit;
