@@ -87,12 +87,12 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>반갑습니다.</td>
-                        <td>주히</td>
-                        <td>2021-09-01</td>
-                        <td>10</td>
+                      <tr th:each="item : ${list}">
+                        <th scope="row" th:text="${item.bnum}">1</th>
+                        <td><a href="#" th:href="@{|/bbs/${item.bnum}|}" th:text="${item.btitle}"></a></td>
+                        <td th:text="${item.bnickname}">주히</td>
+                        <td th:text="${item.bcdate}">2021-09-01</td>
+                        <td th:text="${item.bhit}">10</td>
                       </tr>
                     </tbody>
                   </table>

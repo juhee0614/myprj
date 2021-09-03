@@ -21,14 +21,6 @@ public interface BoardDAO {
 	Long reply(BoardDTO boardDTO);
 	
 	/**
-	 * 게시글 수정
-	 * @param bnum
-	 * @param boardDTO
-	 * @return
-	 */
-	Long modifyItem(Long bnum,BoardDTO boardDTO);
-	
-	/**
 	 * 게시글 목록
 	 * @return
 	 */
@@ -40,6 +32,14 @@ public interface BoardDAO {
 	 * @return
 	 */
 	BoardDTO itemDetail(Long bnum);
+	
+	/**
+	 * 게시글 수정
+	 * @param bnum
+	 * @param boardDTO
+	 * @return
+	 */
+	Long modifyItem(Long bnum,BoardDTO boardDTO);
 	
 	/**
 	 * 게시글 삭제

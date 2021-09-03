@@ -41,6 +41,7 @@ insert into code(code,decode,pcode,use_yn) values ('A01','취미',NULL,'Y');
 insert into code(code,decode,pcode,use_yn) values ('A02','성별',NULL,'Y');
 insert into code(code,decode,pcode,use_yn) values ('A03','지역',NULL,'Y');
 insert into code(code,decode,pcode,use_yn) values ('A04','첨부파일',NULL,'Y');
+insert into code(code,decode,pcode,use_yn) values ('A05','게시판',NULL,'Y');
 insert into code(code,decode,pcode,use_yn) values ('A0101','수영','A01','Y');
 insert into code(code,decode,pcode,use_yn) values ('A0102','골프','A01','Y');
 insert into code(code,decode,pcode,use_yn) values ('A0103','영화','A01','Y');
@@ -51,6 +52,10 @@ insert into code(code,decode,pcode,use_yn) values ('A0302','부산','A03','Y');
 insert into code(code,decode,pcode,use_yn) values ('A0303','울산','A03','Y');
 insert into code(code,decode,pcode,use_yn) values ('A0401','회원이미지','A04','Y');
 insert into code(code,decode,pcode,use_yn) values ('A0402','상품이미지','A04','Y');
+insert into code(code,decode,pcode,use_yn) values ('A0501','Spring','A05','Y');
+insert into code(code,decode,pcode,use_yn) values ('A0502','DATABASE','A05','Y');
+insert into code(code,decode,pcode,use_yn) values ('A0503','WEB Standard','A05','Y');
+insert into code(code,decode,pcode,use_yn) values ('A0504','Q&A','A05','Y');
 
 drop table hobby;
 create table hobby (
