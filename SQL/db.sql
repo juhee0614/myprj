@@ -94,4 +94,26 @@ start with 1
 maxvalue 999999999
 nocycle;
 
+drop table uploadfile;
+create table uploadfile(
+  fid number(10),
+  rid varchar2(10) not null,
+  code varchar2(11) not null,
+  store_fname varchar2(50) not null,
+  upload_fname varchar2(50) not null,
+  fsize varchar2(45) not null,
+  ftype varchar2(100) not null,
+  cdate timestamp default systimestamp,
+  udate timestamp,
+  constraint uploadfile_fid_pk primary key(fid),
+  --constraint uploadfile_rid_fk1 FOREIGN key(rid) references product,  
+  constraint uploadfile_pid_fk2 FOREIGN key(code) references code
+);
+drop sequence uploadfile_fid_seq;
+create sequence uploadfile_fid_seq
+increment by 1 --증감치
+start with 1 --시작값
+maxvalue 9999999999 --최대값
+nocycle;  --순환하지않음
+
 commit;

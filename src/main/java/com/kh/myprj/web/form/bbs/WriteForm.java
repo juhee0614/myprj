@@ -1,6 +1,10 @@
 package com.kh.myprj.web.form.bbs;
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sun.istack.NotNull;
 
@@ -20,4 +24,6 @@ public class WriteForm {
 	private String bnickname;
 	@NotBlank
 	private String bcontent;
+	
+	private List<MultipartFile> files; //첨부파일
 }
