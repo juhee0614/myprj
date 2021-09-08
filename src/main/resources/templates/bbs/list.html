@@ -89,7 +89,13 @@
                     <tbody>
                       <tr th:each="item : ${list}">
                         <th scope="row" th:text="${item.bnum}">1</th>
-                        <td><a href="#" th:href="@{|/bbs/${item.bnum}|}" th:text="${item.btitle}"></a></td>
+                        <td class="w-50">
+                        <th:block th:if="${item.bindent} > 0">
+                        	<span th:each="cnt :${#numbers.sequence(1,item.bindent)}">&nbsp;&nbsp;</span>
+                       	 <i class="far fa-comment-dots"></i>
+                        </th:block >
+                        <a href="#" th:href="@{|/bbs/${item.bnum}|}" th:text="${item.btitle}"></a>
+                        </td>
                         <td th:text="${item.bnickname}">주히</td>
                         <td th:text="${item.bcdate}">2021-09-01</td>
                         <td th:text="${item.bhit}">10</td>

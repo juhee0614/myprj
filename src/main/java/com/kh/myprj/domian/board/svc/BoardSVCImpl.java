@@ -47,7 +47,12 @@ public class BoardSVCImpl implements BoardSVC {
 	@Override
 	public Long reply(BoardDTO boardDTO) {
 		Long bnum = boardDAO.reply(boardDTO);
-		return bnum;
+	//첨부파일 메타정보 저장
+		upLoadFileDAO.addFiles(
+				convert(bnum, boardDTO.getBcategory(), boardDTO.getFiles())
+		);
+	return bnum;
+		
 	}
 	//게시글전체목록
 	@Override
@@ -75,6 +80,10 @@ public class BoardSVCImpl implements BoardSVC {
 	@Override
 	public Long modifyItem(Long bnum, BoardDTO boardDTO) {
 		Long modifiedBnum = boardDAO.modifyItem(bnum, boardDTO);
+	//첨부파일 메타정보 저장
+			upLoadFileDAO.addFiles(
+					convert(bnum, boardDTO.getBcategory(), boardDTO.getFiles())
+			);
 		return modifiedBnum;
 	}
 	//게시글삭제
