@@ -25,6 +25,7 @@ public interface BoardSVC {
 	 * @return
 	 */
 	List<BoardDTO> list();
+	List<BoardDTO> list(int startRec,int endRec);
 	
 	/**
 	 * 게시글 상세조회
@@ -47,6 +48,11 @@ public interface BoardSVC {
 	 */
 	void DelItem(Long bnum);
 	
+	/**
+	 * 총 게시글 레코드수
+	 * @return
+	 */
+	long titalRecordCount();
 	
 	
 }

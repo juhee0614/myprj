@@ -60,6 +60,11 @@ public class BoardSVCImpl implements BoardSVC {
 		List<BoardDTO> list = boardDAO.list();
 		return list;
 	}
+	@Override
+	public List<BoardDTO> list(int startRec, int endRec) {
+		List<BoardDTO> list = boardDAO.list(startRec, endRec);
+		return list;
+	}
 	//게시글상세조회
 	@Override
 	public BoardDTO itemDetail(Long bnum) {
@@ -96,5 +101,10 @@ public class BoardSVCImpl implements BoardSVC {
 		//업로드 파일 메타정보 삭제
 		upLoadFileDAO.deleteFileByRid(String.valueOf(bnum));
 	}
-
+	
+	//게시판 전체 레코드 수
+	@Override
+	public long titalRecordCount() {
+		return boardDAO.titalRecordCount();
+	}
 }

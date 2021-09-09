@@ -25,6 +25,7 @@ public interface BoardDAO {
 	 * @return
 	 */
 	List<BoardDTO> list();
+	List<BoardDTO> list(int startRec,int endRec);
 	
 	/**
 	 * 게시글 상세조회
@@ -52,8 +53,11 @@ public interface BoardDAO {
 	 * @param bnum
 	 */
 	void updateBhit(Long bnum);
-	
-	
+	/**
+	 * 총 게시글 레코드수
+	 * @return
+	 */
+	long titalRecordCount();
 	
 	
 }

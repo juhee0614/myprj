@@ -24,6 +24,7 @@ public class BoardDAOImplTest {
 	
 	@Test
 	@DisplayName("게시글생성")
+	@Disabled
 void write() {
 		
 		BoardDTO boardDTO = new BoardDTO();
@@ -37,6 +38,27 @@ void write() {
 		Long bnum = boardDAOImpl.write(boardDTO);
 		log.info("원글생성 bnum:{}",bnum);
 	}
+	
+	@Test
+	@DisplayName("원글생성")
+	void write300() {
+		
+		for(int i=0; i<300; i++) {
+		BoardDTO boardDTO = new BoardDTO();
+		boardDTO.setBcategory("A0502");
+		boardDTO.setBtitle("제목"+(i+1));
+		boardDTO.setBid(1L);
+		boardDTO.setBemail("wwwss7@naver.com");
+		boardDTO.setBnickname("test");
+		boardDTO.setBcontent("내용"+(i+1));
+		
+		Long bnum = boardDAOImpl.write(boardDTO);
+		log.info("원글생성 bnum:{}",bnum);
+	}
+	}
+	
+	
+	
 	@Test
 	@DisplayName("게시글수정")
 	@Disabled
