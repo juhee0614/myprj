@@ -18,21 +18,13 @@
   
   <title>커뮤너티</title>
   
-<!--   <link rel="stylesheet" href="/css/xxx.css" /> -->
-  <script>
-  window.addEventListener("DOMContentLoaded",init);
-  
-  function init(e){
-	  writeBtn.addEventListener('click',e=>{
-		  location.href='/bbs/';
-	  });
-  }
-  </script>
+  <!--  <link rel="stylesheet" href="/css/xxx.css" />  -->
+  <script src="/js/bbs/list.js" defer></script>
   <style>
     .main .wrap{
       display:flex;
       justify-content: center;
-      margin : 50px 0;
+      margin : 50px 0 50px 0;
     }
     .main .wrap .wrap-bbs{
       width:95%;
@@ -77,7 +69,11 @@
               <div class="wrap">
                 <div class="wrap-bbs">
                   <table class="table table-sm table-hover table-bordered caption-top">
-                    <caption class="bbs-title"><h3>게시글 목록</h3></caption>
+                    <caption class="bbs-title">
+                    <h3 th:each="bbs:${category}"
+                    		th:if="${bbs.code == cate }"
+                    		th:text="${bbs.decode}">게시글 목록</h3>
+                    </caption>
                     <thead>
                       <tr class="table-danger">
                         <th scope="col">번호</th>
@@ -104,46 +100,40 @@
                     </tbody>
                   </table>
                   <div class="wrap-bbs-btns">
-                    <button type="button" id="writeBtn" class="btn btn-sm btn-light">글작성</button>
+                    <button type="button" id="writeBtn" class="btn btn-sm btn-light" th:data-cate="${cate}">글작성</button>
                   </div>
                                       <div class="wrap-bbs-paging">
-                       <ul class="pagination pagination-sm justify-content-center">
-                       <th:block th:if="${pc.prev}">
-                       <li class="page-item" >
-                               <a class="page-link" href="#" th:href="@{/bbs/list/1}" >
-                               <i class="fas fa-angle-double-left"></i>
-                               </a>
-                       </li>
-                       <li class="page-item">
-                               <a class="page-link" href="#" th:href="@{|/bbs/list/${pc.startPage-1}|}" >
-                               <i class="fas fa-angle-left"></i>
-                               </a>
-                       </li>
-                       </th:block>
-                         <th:block th:each="pnum : ${#numbers.sequence(pc.startPage,pc.endPage)}">
-                               <li class="page-item active" aria-current="page"
-                                     th:if="${pc.rc.reqPage == pnum}">
-                              <span class="page-link" th:text="${pnum}">1</span>
-                            </li>                         
-                            <li class="page-item" 
-                                  th:if="${pc.rc.reqPage != pnum}">
-                               <a class="page-link" href="#" th:href="@{|/bbs/list/${pnum}|}" th:text="${pnum}">3</a>
-                            </li>
-                         </th:block>
-                         <th:block th:if="${pc.next}">
-                           <li class="page-item">
-                               <a class="page-link" href="#" th:href="@{|/bbs/list/${pc.endPage+1}|}" >
-                               <i class="fas fa-angle-right"></i>
-                               </a>
-                            </li>
-                           <li class="page-item">
-                               <a class="page-link" href="#" th:href="@{|/bbs/list/${pc.finalEndPage}|}" >
-                               <i class="fas fa-angle-double-right"></i>
-                               </a>
-                            </li>
-                          </th:block>
-                       </ul>
-                     </div>
+							  <ul class="pagination pagination-sm justify-content-center">
+							  	<th:block th:if="${pc.prev}">
+								  	<li class="page-item">
+									    	<a class="page-link" href="#" th:href="@{/bbs/list/1(cate=${cate})}"><i class="fas fa-angle-double-left"></i></a>
+									  </li>
+								  	<li class="page-item">
+									    	<a class="page-link" href="#" th:href="@{/bbs/list/{reqPage}(reqPage=${pc.startPage-1},cate=${cate})}"><i class="fas fa-angle-left"></i></a>
+									  </li>
+								  </th:block>
+							    <th:block th:each="pnum : ${#numbers.sequence(pc.startPage,pc.endPage)}">
+							    	<th:block th:if="${pnum != 0}">
+	 									<li class="page-item active" aria-current="page"
+	 											th:if="${pc.rc.reqPage == pnum}">
+								      <span class="page-link" th:text="${pnum}">1</span>
+								    </li>							    
+								    <li class="page-item" 
+								    		th:if="${pc.rc.reqPage != pnum}">
+								    	<a class="page-link" href="#" th:href="@{/bbs/list/{reqPage}(reqPage=${pnum},cate=${cate})}" th:text="${pnum}">3</a>
+								    </li>
+								    </th:block>
+							    </th:block>
+							    <th:block th:if="${pc.next}">
+								  	<li class="page-item">
+									    	<a class="page-link" href="#" th:href="@{/bbs/list/{reqPage}(reqPage=${pc.endPage+1},cate=${cate})}"><i class="fas fa-angle-right"></i></a>
+									  </li>
+								  	<li class="page-item">
+									    	<a class="page-link" href="#" th:href="@{/bbs/list/{reqPage}(reqPage=${pc.finalEndPage},cate=${cate})}"><i class="fas fa-angle-double-right"></i></a>
+									  </li>		
+									</th:block>
+							  </ul>
+							</div>
                 </div>
               </div>         
          </main>

@@ -28,6 +28,15 @@ public interface BoardSVC {
 	List<BoardDTO> list(int startRec,int endRec);
 	
 	/**
+	 * 카테고리별 게시글 목록
+	 * @param category
+	 * @param startRec
+	 * @param endRec
+	 * @return
+	 */
+	List<BoardDTO> list(String bcategory,int startRec,int endRec);
+	
+	/**
 	 * 게시글 상세조회
 	 * @param bnum
 	 * @return
@@ -53,6 +62,11 @@ public interface BoardSVC {
 	 * @return
 	 */
 	long titalRecordCount();
-	
+	/**
+	 * 게시판 카테고리별 레코드 수
+	 * @param category
+	 * @return
+	 */
+	long titalRecordCount(String bcategory);
 	
 }

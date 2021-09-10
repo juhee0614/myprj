@@ -65,6 +65,11 @@ public class BoardSVCImpl implements BoardSVC {
 		List<BoardDTO> list = boardDAO.list(startRec, endRec);
 		return list;
 	}
+	@Override
+	public List<BoardDTO> list(String bcategory, int startRec, int endRec) {
+		List<BoardDTO> list = boardDAO.list(bcategory, startRec, endRec);
+		return list;
+	}
 	//게시글상세조회
 	@Override
 	public BoardDTO itemDetail(Long bnum) {
@@ -106,5 +111,10 @@ public class BoardSVCImpl implements BoardSVC {
 	@Override
 	public long titalRecordCount() {
 		return boardDAO.titalRecordCount();
+	}
+	//카테고리별 전체 레코드수
+	@Override
+	public long titalRecordCount(String bcategory) {
+		return boardDAO.titalRecordCount(bcategory);
 	}
 }

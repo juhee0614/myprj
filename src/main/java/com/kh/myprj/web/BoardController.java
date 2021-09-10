@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -64,9 +65,10 @@ public class BoardController {
 	
 	
 	//원글 작성 양식
-	@GetMapping("/")
+	@GetMapping("")
 	public String writeForm(
 			//@ModelAttribute WriteForm wrtieForm
+			@RequestParam String cate,
 			Model model,
 			HttpServletRequest request
 			) {
@@ -81,6 +83,7 @@ public class BoardController {
 			writeForm.setBid(loginMember.getId());
 			writeForm.setBemail(loginMember.getEmail());
 			writeForm.setBnickname(loginMember.getNickname());
+			writeForm.setBcategory(cate);
 		}
 		
 		model.addAttribute("writeForm",writeForm);
@@ -88,7 +91,7 @@ public class BoardController {
 	}
 	
 	//원글 작성 처리
-	@PostMapping("/")
+	@PostMapping("")
 	public String write(
 			@Valid @ModelAttribute WriteForm writeForm,
 			BindingResult bindingResult,
@@ -205,24 +208,41 @@ public class BoardController {
 	}
 	
 	//게시글 목록
-	@GetMapping({"/list","/list/{reqPage}"})
-	public String list(@PathVariable(required = false) Integer reqPage,
+	@GetMapping({"/list","list/{reqPage}"})
+	public String list(@RequestParam(required = false) String cate,
+											@PathVariable(required = false) Integer reqPage,
 											Model model
 											) {
+		List<BoardDTO> list = null;
+		
 		//요청페이지가 없으면 1페이지로
 		if(reqPage==null) reqPage =1;
+		
+		//게시판 게시글 전체목록
+		if(cate == null ) {
 		//사용자가 요청 한 페이지 번호
 		pc.getRc().setReqPage(reqPage);
 		//게시판 전체 레코드 수 
 		pc.setTotalRec(boardSVC.titalRecordCount());
-		//페이징 계산
-		pc.calculatePaging();
+
 		
-		List<BoardDTO> list = boardSVC.list(pc.getRc().getStartRec(),
-																				pc.getRc().getEndRec());
-		
+		list = boardSVC.list(pc.getRc().getStartRec(),
+											pc.getRc().getEndRec());
+		//카테고리별 게시글 목록
+		}else {
+		//사용자가 요청 한 페이지 번호
+			pc.getRc().setReqPage(reqPage);
+			//게시판 전체 레코드 수 
+			pc.setTotalRec(boardSVC.titalRecordCount(cate));
+			
+		 list = boardSVC.list(cate,
+													 pc.getRc().getStartRec(),
+														pc.getRc().getEndRec());
+
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("pc",pc);
+		model.addAttribute("cate",cate);
 		
 		return "bbs/list";
 	}	

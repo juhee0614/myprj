@@ -238,6 +238,37 @@ public class BoardDAOImpl implements BoardDAO {
 		return list;
 		
 	}
+	//카테고리별 게시글 목록
+	@Override
+	public List<BoardDTO> list(String bcategory, int startRec, int endRec) {
+StringBuffer sql = new StringBuffer();
+		
+		sql.append("select t1.* ");
+		sql.append("from (select row_number() over(order by bgroup desc, bstep asc) as num, ");
+		sql.append("             bnum,   ");
+		sql.append("             bcategory,   ");
+		sql.append("             btitle,   ");
+		sql.append("             bnickname,   ");
+		sql.append("             bid,  ");
+		sql.append("             bemail,   ");
+		sql.append("             bhit,  ");
+		sql.append("             pbnum,  ");
+		sql.append("             bgroup,  ");
+		sql.append("             bstep,  ");
+		sql.append("             bindent,  ");
+		sql.append("             status,  ");
+		sql.append("             bcdate,  ");
+		sql.append("             budate  ");
+		sql.append("        from board  ");
+		sql.append("			 where bcategory = ? ) t1 ");
+		sql.append("where num between ? and ? ");
+		
+		List<BoardDTO> list =  jt.query(sql.toString(),
+				new BeanPropertyRowMapper<>(BoardDTO.class),
+				bcategory,startRec,endRec);
+		
+		return list;
+	}
 	//게시글상세조회
 	@Override
 	public BoardDTO itemDetail(Long bnum) {
@@ -300,6 +331,18 @@ public class BoardDAOImpl implements BoardDAO {
 		sql.append("  from board ");
 		
 		long cnt = jt.queryForObject(sql.toString(), Long.class);
+		return cnt;
+	}
+	//게시판 카테고리별 레코드수 
+	@Override
+	public long titalRecordCount(String bcategory) {
+StringBuffer sql = new StringBuffer();
+		
+		sql.append("select count(*) ");
+		sql.append("  from board ");
+		sql.append("  where bcategory=? ");
+		
+		long cnt = jt.queryForObject(sql.toString(), Long.class,bcategory);
 		return cnt;
 	}
 }
