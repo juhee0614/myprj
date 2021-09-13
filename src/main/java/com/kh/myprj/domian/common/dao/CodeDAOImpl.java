@@ -21,11 +21,14 @@ public class CodeDAOImpl implements CodeDAO {
 	@Override
 	public List<Code> getCode(String pcode) {
 
-		StringBuffer sql = new StringBuffer();
-		sql.append("select code,decode from code where pcode = ?");
-		List<Code> codes = 
-				jt.query(sql.toString(), new BeanPropertyRowMapper<>(Code.class), pcode);
-		return codes;
-	}
+	   StringBuffer sql = new StringBuffer();
+     sql.append("select code,decode from code ");
+     sql.append(" where pcode = ? ");
+     sql.append("   and use_yn = 'Y' ");
+     sql.append("   order by code");
+     List<Code> codes = 
+           jt.query(sql.toString(), new BeanPropertyRowMapper<>(Code.class), pcode);
+     return codes;
+  }
 
 }
