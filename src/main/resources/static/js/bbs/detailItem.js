@@ -30,7 +30,8 @@ $modifyBtn?.addEventListener("click", e=>{
 //삭제
 $delBtn?.addEventListener("click", e=>{
 	const bnum = e.target.dataset.bnum;
-	const url = `/bbs/${bnum}`;
+	const cate = e.target.dataset.cate;
+	const url = `/bbs/${cate}/${bnum}`;
 	
 	if(confirm('삭제하시겠습니까?')){
 		request.delete(url)

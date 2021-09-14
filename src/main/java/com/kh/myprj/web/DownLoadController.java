@@ -33,9 +33,11 @@ public class DownLoadController {
     * @throws MalformedURLException
     */
    @ResponseBody //http응답 메세지 바디에 직접내용쓰기
-   @GetMapping("/images/{fname}")
-   public Resource downLoadImage(@PathVariable String fname) throws MalformedURLException  {
-      Resource resource = new UrlResource("file:"+fileStore.getFullPath(fname));
+   @GetMapping("/images/{cate}/{fname}")
+   public Resource downLoadImage(
+  		 @PathVariable String cate,
+  		 @PathVariable String fname) throws MalformedURLException  {
+      Resource resource = new UrlResource("file:"+fileStore.getFullPath(cate,fname));
       return resource;
    }
    
@@ -46,12 +48,13 @@ public class DownLoadController {
     * @return
     * @throws MalformedURLException
     */
-   @GetMapping("/attach/{sfname}/{ufname}")
+   @GetMapping("/attach/{cate}/{sfname}/{ufname}")
    public ResponseEntity<Resource> downloadAttach(
+  		 		@PathVariable String cate,
          @PathVariable String sfname,
          @PathVariable String ufname) throws MalformedURLException{
       
-      Resource resource = new UrlResource("file:"+fileStore.getFullPath(sfname));
+      Resource resource = new UrlResource("file:"+fileStore.getFullPath(cate,sfname));
       
       //한글파일명 깨짐 방지를위한 인코딩
       String encodeUploadFileName = UriUtils.encode(ufname, StandardCharsets.UTF_8);

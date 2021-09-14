@@ -69,7 +69,7 @@ public interface BoardSVC {
 	 * 게시글 삭제
 	 * @param bnum
 	 */
-	void DelItem(Long bnum);
+	void DelItem(String cate,Long bnum);
 	
 	/**
 	 * 총 게시글 레코드수
